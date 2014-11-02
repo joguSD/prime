@@ -10,7 +10,10 @@ def is_p? p
   end
 
   current = Term.new(p)
-  (p-1).times do |n|
+  # original line
+  # (p-1).times do |n|
+  #pascal's triangle is symmetric, maybe only need to check halfway?
+  ((p)/2).times do |n|
     current = current.derive
     current.reduce(n+1)
 
@@ -33,8 +36,13 @@ class Bignum
   end
 end
 
-1000000.times do |x|
+primes = []
+100000.times do |x|
   if x.is_prime? 
-    puts x 
+    primes.push x
+    # puts x
   end
 end
+
+# print primes
+File.open('primes.out', 'w') {|file| file.write(primes.to_s)}
